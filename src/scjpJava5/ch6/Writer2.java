@@ -37,5 +37,6 @@ public class Writer2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

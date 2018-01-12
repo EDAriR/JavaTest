@@ -1,3 +1,5 @@
+package sideProjectTest;
+
 import java.math.BigDecimal;
 
 public class Test2 {

@@ -17,7 +17,8 @@ public class Dog extends Animal{
 
         for (int x = 0 ; x < a.length; x++) {
             a[x].doStuff();
-            if (a[x].equals(d)) {
+            if (a[x] instanceof Dog) {
+                ((Dog)a[x]).doStuff();
                 System.out.println("yes");
                 d.doStuff();
             }

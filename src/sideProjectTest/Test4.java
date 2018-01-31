@@ -19,11 +19,24 @@ public class Test4 {
         m.setDate(new Date());
 
         List<Model> ml = new ArrayList<>();
-        ml.add(m);
-        ml.add(m);
-        ml.add(m);
-        ml.add(m);
+
+        System.out.println("null List");
+
         List<TO> tl = ml.stream()
+                .map(t -> t.convert())
+                .collect(Collectors.toList());
+
+        for (TO t:tl) {
+            System.out.println(t);
+        }
+        System.out.println("null List end ");
+
+        ml.add(m);
+        ml.add(m);
+        ml.add(m);
+        ml.add(m);
+
+        tl = ml.stream()
                 .map(t -> t.convert())
                 .collect(Collectors.toList());
 

@@ -15,6 +15,9 @@ public class Test2 {
         BigDecimal b2 = new BigDecimal(a2);
         BigDecimal b3 = new BigDecimal(100);
 
+        b1.divide(b2);
+
+        // multiply 成
         long a3 = b1.multiply(b2).divide(b3,0,BigDecimal.ROUND_UP).toBigInteger().longValue();
         System.out.println(a3);
         //將 BigDecimal 轉成 int

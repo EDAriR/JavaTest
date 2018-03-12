@@ -18,5 +18,6 @@ public class ListToArraytoList {
         System.out.println(al);
         System.out.println(aa);
 
+
     }
 }

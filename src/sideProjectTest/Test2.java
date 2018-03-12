@@ -9,7 +9,7 @@ public class Test2 {
         long a1 = 82;
         long a2 = 3;
         long intresult;
-            String strresult;
+        String strresult;
 
         BigDecimal b1 = new BigDecimal(a1);
         BigDecimal b2 = new BigDecimal(a2);
@@ -23,15 +23,14 @@ public class Test2 {
         //將 BigDecimal 轉成 int
         intresult = ((b1.divide(b2,0,BigDecimal.ROUND_UP)).toBigInteger()).longValue();
 
-            //將 BigDecimal 轉成 String
-            strresult = (b1.divide(b2,0,BigDecimal.ROUND_UP)).toString();
+        //將 BigDecimal 轉成 String
+        strresult = (b1.divide(b2,0,BigDecimal.ROUND_UP)).toString();
 
-            System.out.println( a1 + "÷" + a2
-                    + " 無條件進位 " + intresult );
+        System.out.println( a1 + "÷" + a2 + " 無條件進位 " + intresult );
 
-            //將 int 轉成 String
-            System.out.println( String.valueOf(a1) + "÷" + String.valueOf(a2)
-                    + " 無條件進位 " + String.valueOf(intresult) );
+        //將 int 轉成 String
+        System.out.println( String.valueOf(a1) + "÷" + String.valueOf(a2)
+                + " 無條件進位 " + String.valueOf(intresult) );
 
     }
 }

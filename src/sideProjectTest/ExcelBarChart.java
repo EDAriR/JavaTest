@@ -55,6 +55,7 @@ public class ExcelBarChart {
         CTBarChart ctBarChart = ctPlotArea.addNewBarChart();
         CTBoolean ctBoolean = ctBarChart.addNewVaryColors();
         ctBoolean.setVal(true);
+        // COL 直的 BAR 橫的
         ctBarChart.addNewBarDir().setVal(STBarDir.COL);
 
 
@@ -66,26 +67,45 @@ public class ExcelBarChart {
             CTSerTx ctSerTx = ctBarSer.addNewTx();
             CTStrRef ctStrRef = ctSerTx.addNewStrRef();
 
-            ctStrRef.setF("Sheet1!$A$" + 5);
+
+            ctStrRef.setF("Sheet1!$A$" + r);
             ctBarSer.addNewIdx().setVal(r-2);
+
 
             CTAxDataSource cttAxDataSource = ctBarSer.addNewCat();
             ctStrRef = cttAxDataSource.addNewStrRef();
-            ctStrRef.setF("Sheet1!$B$1:$D$1");
-
+//            ctStrRef.setF("Sheet1!$B$1:$D$1");
+            ctStrRef.setF("Sheet1!$A$" + r);
 
             CTNumDataSource ctNumDataSource = ctBarSer.addNewVal();
             CTNumRef ctNumRef = ctNumDataSource.addNewNumRef();
-            ctNumRef.setF("Sheet1!$B$" + r + ":$D$" + r);
+//            ctNumRef.setF("Sheet1!$B$" + r + ":$D$" + r);
+
+            //值 A-Z AA-AZ 橫的列 1-N 直的行
+            System.out.println(r);
+            switch (r){
+                case 2:
+                    ctNumRef.setF("Sheet1!$B$2:$B$5");
+                    break;
+                case 3:
+                    ctNumRef.setF("Sheet1!$C$2:$C$5");
+                    break;
+                case 4:
+                    ctNumRef.setF("Sheet1!$D$2:$D$5");
+                    break;
+                default:
+            }
 
             //at least the border lines in Libreoffice Calc ;-)
-            ctBarSer.addNewSpPr().addNewLn().addNewSolidFill().addNewSrgbClr().setVal(new byte[] {0,0,0});
+            // 柱子 框框顏色 bar color
+            ctBarSer.addNewSpPr().addNewLn().addNewSolidFill().addNewSrgbClr().setVal(new byte[] {127,127,0});
 
         }
 
         //telling the BarChart that it has axes and giving them Ids
-//        ctBarChart.addNewAxId().setVal(123456);
-//        ctBarChart.addNewAxId().setVal(10);
+        // bar 下面的字
+        ctBarChart.addNewAxId().setVal(123456);
+        ctBarChart.addNewAxId().setVal(5);
 //
         //cat axis
         CTCatAx ctCatAx = ctPlotArea.addNewCatAx();
@@ -94,9 +114,9 @@ public class ExcelBarChart {
         ctScaling.addNewOrientation().setVal(STOrientation.MIN_MAX);
         ctCatAx.addNewDelete().setVal(false);
         ctCatAx.addNewAxPos().setVal(STAxPos.B);
-        ctCatAx.addNewCrossAx().setVal(111); //id of the val axis
+        ctCatAx.addNewCrossAx().setVal(1000000000); //id of the val axis
         ctCatAx.addNewTickLblPos().setVal(STTickLblPos.NEXT_TO);
-//
+
         //val axis
         CTValAx ctValAx = ctPlotArea.addNewValAx();
         ctValAx.addNewAxId().setVal(123457); //id of the val axis
@@ -108,9 +128,9 @@ public class ExcelBarChart {
         ctValAx.addNewTickLblPos().setVal(STTickLblPos.NEXT_TO);
 //
 //        //legend
-//        CTLegend ctLegend = ctChart.addNewLegend();
-//        ctLegend.addNewLegendPos().setVal(STLegendPos.B);
-//        ctLegend.addNewOverlay().setVal(false);
+        CTLegend ctLegend = ctChart.addNewLegend();
+        ctLegend.addNewLegendPos().setVal(STLegendPos.B);
+        ctLegend.addNewOverlay().setVal(false);
 //
 //        System.out.println(ctChart);
 

@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.1.RELEASE</version>
+  </parent>
+  
+  <groupId>com.JavaTest</groupId>
+  <artifactId>JavaTest</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>JavaTest</name>
+  
+  <properties>
+		<!-- Maven settings -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.plugin.version>3.5</maven.compiler.plugin.version>
+  </properties>
+  
+  <dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- use jersey in spring boot start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+
+			<!-- use jetty instead of tomcat -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- use jersey in spring boot end -->
+
+		<!-- jetty start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		<!-- jetty end -->
+
+		<!-- jpa start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- jpa end -->
+		
+		<!-- redis start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!-- redis end -->
+		
+
+		<!-- syntrontech redis-orm start -->
+		<dependency>
+			<groupId>com.syntrontech</groupId>
+			<artifactId>redis-orm</artifactId>
+			<version>1.2.0-RC</version>
+		</dependency>
+		<!-- syntrontech redis-orm end -->
+
+		<!-- postgres start -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- postgres end -->
+		
+		<!-- dbcp2 start -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+		</dependency>
+		<!-- dbcp2 end -->
+		
+		<!-- Liquibase start -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<!-- Liquibase end -->
+		
+		<!-- Apache POI start -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>ooxml-schemas</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<!-- Apache POI start -->
+		
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+    		<version>1.0.13</version>
+		</dependency>
+		
+	</dependencies>
+	<build>
+		<finalName>JavaTest</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- <configuration> 
+						<source>${javac.compile.level}</source> 
+						<target>${javac.compile.level}</target> 
+					</configuration> -->
+			</plugin>
+		</plugins>
+	</build>
+	
+  
+</project>

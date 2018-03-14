@@ -22,5 +22,9 @@ public class EnumTest {
             System.out.println(t.name());
         }
 
+        System.out.println(TEST.valueOf("NO"));
+        System.out.println(TEST.valueOf("N"));
+
+
     }
 }

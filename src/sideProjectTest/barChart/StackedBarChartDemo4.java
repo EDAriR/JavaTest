@@ -1,4 +1,4 @@
-package sideProjectTest;
+package sideProjectTest.barChart;
 
 import org.jfree.chart.*;
 import org.jfree.chart.axis.SubCategoryAxis;

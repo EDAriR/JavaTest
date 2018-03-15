@@ -1,4 +1,4 @@
-package sideProjectTest;
+package sideProjectTest.barChart;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFChart;
@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static java.util.Arrays.asList;
 
 public class ExcelBarChart {
 

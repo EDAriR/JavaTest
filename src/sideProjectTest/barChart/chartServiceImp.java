@@ -75,8 +75,8 @@ public class chartServiceImp  {
         rangeAxis.setLowerMargin(0.0);
         rangeAxis.setUpperMargin(0.0);
 
-        int width = 144 * datas.size();    /* Width of the image */
-        int height = 480;   /* Height of the image */
+        int width = 960;    /* Width of the image */
+        int height = 540;   /* Height of the image */
         File BarChart = new File( "BarChart.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );
 

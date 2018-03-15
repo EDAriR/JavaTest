@@ -14,6 +14,8 @@ import org.jfree.ui.RefineryUtilities;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class StackedBarChartDemo4 extends ApplicationFrame {
 
@@ -22,13 +24,17 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
      *
      * @param title  the frame title.
      */
-    public StackedBarChartDemo4(final String title) {
+    public StackedBarChartDemo4(final String title) throws IOException {
         super(title);
         final CategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
-        final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
-        setContentPane(chartPanel);
+//        final ChartPanel chartPanel = new ChartPanel(chart);
+//        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
+//        setContentPane(chartPanel);
+        int width = 960;    /* Width of the image */
+        int height = 540;   /* Height of the image */
+        File BarChart = new File( "BarChart.jpeg" );
+        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 
     /**
@@ -39,15 +45,15 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private CategoryDataset createDataset() {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-        result.addValue(20.3, "Product 1 (US)", "Jan 04");
-        result.addValue(19.4, "Product 1 (Europe)", "Jan 04");
-        result.addValue(16.5, "Product 1 (Asia)", "Jan 04");
-        result.addValue(13.2, "Product 1 (Middle East)", "Jan 04");
+        result.addValue(100, "Product 1 (US)", "unit_1");
+        result.addValue(100.4, "Product 1 (Europe)", "unit_2");
+        result.addValue(100.5, "Product 1 (Asia)", "unit_3");
+        result.addValue(100.2, "Product 1 (Middle East)", "Jan 04");
 
-        result.addValue(23.3, "Product 2 (US)", "Jan 04");
-        result.addValue(12.7, "Product 2 (Europe)", "Jan 04");
-        result.addValue(15.4, "Product 2 (Asia)", "Jan 04");
-        result.addValue(23.8, "Product 2 (Middle East)", "Jan 04");
+        result.addValue(23.3, "Product 2 (US)", "unit_4");
+        result.addValue(12.7, "Product 2 (Europe)", "unit_5");
+        result.addValue(15.4, "Product 2 (Asia)", "unit_6");
+        result.addValue(23.8, "Product 2 (Middle East)", "unit_6");
 
         result.addValue(11.9, "Product 3 (US)", "Jan 04");
         result.addValue(15.3, "Product 3 (Europe)", "Jan 04");
@@ -79,48 +85,51 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 
         GroupedStackedBarRenderer renderer = new GroupedStackedBarRenderer();
         KeyToGroupMap map = new KeyToGroupMap("G1");
-        map.mapKeyToGroup("Product 1 (US)", "G1");
-        map.mapKeyToGroup("Product 1 (Europe)", "G1");
-        map.mapKeyToGroup("Product 1 (Asia)", "G1");
-        map.mapKeyToGroup("Product 1 (Middle East)", "G1");
-        map.mapKeyToGroup("Product 2 (US)", "G2");
-        map.mapKeyToGroup("Product 2 (Europe)", "G2");
-        map.mapKeyToGroup("Product 2 (Asia)", "G2");
-        map.mapKeyToGroup("Product 2 (Middle East)", "G2");
-        map.mapKeyToGroup("Product 3 (US)", "G3");
-        map.mapKeyToGroup("Product 3 (Europe)", "G3");
-        map.mapKeyToGroup("Product 3 (Asia)", "G3");
-        map.mapKeyToGroup("Product 3 (Middle East)", "G3");
+//        map.mapKeyToGroup("Product 1 (US)", "G1");
+//        map.mapKeyToGroup("Product 1 (Europe)", "G1");
+//        map.mapKeyToGroup("Product 1 (Asia)", "G1");
+//        map.mapKeyToGroup("Product 1 (Middle East)", "G1");
+//        map.mapKeyToGroup("Product 2 (US)", "G2");
+//        map.mapKeyToGroup("Product 2 (Europe)", "G2");
+//        map.mapKeyToGroup("Product 2 (Asia)", "G2");
+//        map.mapKeyToGroup("Product 2 (Middle East)", "G2");
+//        map.mapKeyToGroup("Product 3 (US)", "G3");
+//        map.mapKeyToGroup("Product 3 (Europe)", "G3");
+//        map.mapKeyToGroup("Product 3 (Asia)", "G3");
+//        map.mapKeyToGroup("Product 3 (Middle East)", "G3");
         renderer.setSeriesToGroupMap(map);
 
         renderer.setItemMargin(0.3);
         Paint p1 = new GradientPaint(
-                0.0f, 0.0f, new Color(0x22, 0x22, 0xFF), 0.0f, 0.0f, new Color(0x22, 0x22, 0xFF)
+                0.0f, 0.0f, new Color(0x22, 0x22, 0xFF), 0.0f, 0.0f,
+                new Color(0x22, 0x22, 0xFF)
         );
         renderer.setSeriesPaint(0, p1);
-        renderer.setSeriesPaint(4, p1);
-        renderer.setSeriesPaint(8, p1);
 
         Paint p2 = new GradientPaint(
-                0.0f, 0.0f, new Color(0x22, 0xFF, 0x22), 0.0f, 0.0f, new Color(0x22, 0xFF, 0x22)
+                0.0f, 0.0f, new Color(255, 93, 16), 0.0f, 0.0f,
+                new Color(255, 93, 16)
         );
         renderer.setSeriesPaint(1, p2);
-        renderer.setSeriesPaint(5, p2);
-        renderer.setSeriesPaint(9, p2);
 
         Paint p3 = new GradientPaint(
-                0.0f, 0.0f, new Color(0xFF, 0x22, 0x22), 0.0f, 0.0f, new Color(0xFF, 0x88, 0x88)
+                0.0f, 0.0f, new Color(0xFF, 212, 19), 0.0f, 0.0f,
+                new Color(0xFF, 212, 19)
         );
         renderer.setSeriesPaint(2, p3);
-        renderer.setSeriesPaint(6, p3);
-        renderer.setSeriesPaint(10, p3);
 
         Paint p4 = new GradientPaint(
-                0.0f, 0.0f, new Color(0xFF, 0xFF, 0x22), 0.0f, 0.0f, new Color(0xFF, 0xFF, 0x88)
+                0.0f, 0.0f, new Color(67, 0xFF, 250), 0.0f, 0.0f,
+                new Color(67, 0xFF, 250)
         );
         renderer.setSeriesPaint(3, p4);
-        renderer.setSeriesPaint(7, p4);
-        renderer.setSeriesPaint(11, p4);
+
+        Paint p5 = new GradientPaint(
+                0.0f, 0.0f, new Color(88, 0xFF, 62), 0.0f, 0.0f,
+                new Color(88, 0xFF, 62)
+        );
+        renderer.setSeriesPaint(4, p5);
+
         renderer.setGradientPaintTransformer(
                 new StandardGradientPaintTransformer(GradientPaintTransformType.HORIZONTAL)
         );
@@ -149,13 +158,15 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private LegendItemCollection createLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         LegendItem item1 = new LegendItem("US", new Color(0x22, 0x22, 0xFF));
-        LegendItem item2 = new LegendItem("Europe", new Color(0x22, 0xFF, 0x22));
-        LegendItem item3 = new LegendItem("Asia", new Color(0xFF, 0x22, 0x22));
-        LegendItem item4 = new LegendItem("Middle East", new Color(0xFF, 0xFF, 0x22));
+        LegendItem item2 = new LegendItem("Europe", new Color(255, 104, 43));
+        LegendItem item3 = new LegendItem("Asia", new Color(0xFF, 212, 19));
+        LegendItem item4 = new LegendItem("Middle East", new Color(67, 0xFF, 250));
+        LegendItem item5 = new LegendItem("Middle East", new Color(88, 0xFF, 62));
         result.add(item1);
         result.add(item2);
         result.add(item3);
         result.add(item4);
+        result.add(item5);
         return result;
     }
 
@@ -175,11 +186,21 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
      *
      * @param args  ignored.
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws IOException {
         final StackedBarChartDemo4 demo = new StackedBarChartDemo4("Stacked Bar Chart Demo 4");
-        demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
-        demo.setVisible(true);
+//        demo.pack();
+//        RefineryUtilities.centerFrameOnScreen(demo);
+//        demo.setVisible(true);
+
+        final CategoryDataset dataset = demo.createDataset();
+        final JFreeChart chart = demo.createChart(dataset);
+//        final ChartPanel chartPanel = new ChartPanel(chart);
+//        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
+//        setContentPane(chartPanel);
+        int width = 960;    /* Width of the image */
+        int height = 540;   /* Height of the image */
+        File BarChart = new File( "BarChart.jpeg" );
+        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 
 }

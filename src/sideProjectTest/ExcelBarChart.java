@@ -9,38 +9,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import static java.util.Arrays.asList;
 
 public class ExcelBarChart {
 
-    public void createExcelHaveBarChart(List<String> datas) {
+    public void createExcelHaveBarChart(List<Data> datas) {
 
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet("Sheet1");
 
-        Row row;
-        Cell cell;
-
-        row = sheet.createRow(0);
-        row.createCell(0);
-        row.createCell(1).setCellValue("HEADER 1");
-        row.createCell(2).setCellValue("HEADER 2");
-        row.createCell(3).setCellValue("HEADER 3");
-
-        for (int r = 1; r < 5; r++) {
-            row = sheet.createRow(r);
-            cell = row.createCell(0);
-            cell.setCellValue("Serie " + r);
-            cell = row.createCell(1);
-            cell.setCellValue(new java.util.Random().nextDouble());
-            cell = row.createCell(2);
-            cell.setCellValue(new java.util.Random().nextDouble());
-            cell = row.createCell(3);
-            cell.setCellValue(new java.util.Random().nextDouble());
-        }
+        setExcelBody(sheet, datas);
 
 //        Sheet barSheet = wb.createSheet("BarSheet1");
 
@@ -59,23 +40,29 @@ public class ExcelBarChart {
         ctBarChart.addNewBarDir().setVal(STBarDir.COL);
 
 
+        CTBarSer ctBarSer = null;
+        CTSerTx ctSerTx = null;
+        CTStrRef ctStrRef = null;
 
-        for (int r = 2; r < 6; r++) {
+
+        for (int r = 0; r < datas.size(); r++) {
 
 
-            CTBarSer ctBarSer = ctBarChart.addNewSer();
-            CTSerTx ctSerTx = ctBarSer.addNewTx();
-            CTStrRef ctStrRef = ctSerTx.addNewStrRef();
+            ctBarSer = ctBarChart.addNewSer();
+            ctSerTx = ctBarSer.addNewTx();
+            ctStrRef = ctSerTx.addNewStrRef();
 
 
             ctStrRef.setF("Sheet1!$A$" + r);
-            ctBarSer.addNewIdx().setVal(r-2);
+            ctBarSer.addNewIdx().setVal(r);
 
 
             CTAxDataSource cttAxDataSource = ctBarSer.addNewCat();
+
+            // 柱子 正下的字
             ctStrRef = cttAxDataSource.addNewStrRef();
-//            ctStrRef.setF("Sheet1!$B$1:$D$1");
-            ctStrRef.setF("Sheet1!$A$" + r);
+            ctStrRef.setF("Sheet1!$B$1:$D$1");
+//            ctStrRef.setF("Sheet1!$A$" + r);
 
             CTNumDataSource ctNumDataSource = ctBarSer.addNewVal();
             CTNumRef ctNumRef = ctNumDataSource.addNewNumRef();
@@ -98,7 +85,7 @@ public class ExcelBarChart {
 
             //at least the border lines in Libreoffice Calc ;-)
             // 柱子 框框顏色 bar color
-            ctBarSer.addNewSpPr().addNewLn().addNewSolidFill().addNewSrgbClr().setVal(new byte[] {127,127,0});
+            ctBarSer.addNewSpPr().addNewLn().addNewSolidFill().addNewSrgbClr().setVal(new byte[] {0,0,0});
 
         }
 
@@ -149,9 +136,97 @@ public class ExcelBarChart {
         }
     }
 
+    private void setExcelBody(Sheet sheet, List<Data> datas) {
+
+        Row row;
+        Cell cell;
+
+        row = sheet.createRow(0);
+        row.createCell(0).setCellValue("地區");
+        row.createCell(1).setCellValue("血壓（男）");
+        row.createCell(2).setCellValue("血壓（女）");
+        row.createCell(3).setCellValue("血壓（合計）");
+
+        int index = 0;
+        for(Data d:datas){
+            System.out.println("index: " + index);
+            System.out.println(d.getUnitName());
+
+            row = sheet.createRow(index+1);
+            System.out.println("index+1 : " + index);
+
+
+            row.createCell(0).setCellValue(d.getUnitName());
+            row.createCell(1).setCellValue(d.getMaleNumber());
+            row.createCell(2).setCellValue(d.getFamaleNumber());
+
+            index++;
+            System.out.println("index ++ :" + index);
+        }
+    }
+
     public static void main(String[] args) {
 
+        ArrayList<Data> datas = setDatas();
+
         ExcelBarChart ebc = new ExcelBarChart();
-        ebc.createExcelHaveBarChart(new ArrayList<String>(asList("aa","bb","cc")));
+        ebc.createExcelHaveBarChart(datas);
+    }
+
+    private static ArrayList<Data> setDatas() {
+
+
+        ArrayList<Data> datas  = new ArrayList<>();
+
+        Data data = new Data();
+        data.setUnitName("unti_1");
+        data.setFamaleNumber(new Random().nextInt(20));
+        data.setMaleNumber(new Random().nextInt(20));
+        datas.add(data);
+        Data data2 = new Data();
+        data2.setUnitName("unti_2");
+        data2.setFamaleNumber(new Random().nextInt(20));
+        data2.setMaleNumber(new Random().nextInt(20));
+        datas.add(data2);
+        Data data3 = new Data();
+        data3.setUnitName("unti_3");
+        data3.setFamaleNumber(new Random().nextInt(20));
+        data3.setMaleNumber(new Random().nextInt(20));
+        datas.add(data3);
+
+        for(Data d:datas)
+            System.out.println("rrr  : " + d.getUnitName());
+
+        return datas;
+    }
+}
+class Data{
+
+    private String unitName;
+    private int maleNumber;
+    private int famaleNumber;
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public int getMaleNumber() {
+        return maleNumber;
+    }
+
+    public void setMaleNumber(int maleNumber) {
+        this.maleNumber = maleNumber;
+    }
+
+    public int getFamaleNumber() {
+        return famaleNumber;
+    }
+
+    public void setFamaleNumber(int famaleNumber) {
+        this.famaleNumber = famaleNumber;
     }
 }

@@ -26,8 +26,8 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
      */
     public StackedBarChartDemo4(final String title) throws IOException {
         super(title);
-        final CategoryDataset dataset = createDataset();
-        final JFreeChart chart = createChart(dataset);
+        CategoryDataset dataset = createDataset();
+        JFreeChart chart = createChart(dataset);
 //        final ChartPanel chartPanel = new ChartPanel(chart);
 //        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
 //        setContentPane(chartPanel);
@@ -45,20 +45,20 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private CategoryDataset createDataset() {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-        result.addValue(100, "Product 1 (US)", "unit_1");
-        result.addValue(100.4, "Product 1 (Europe)", "unit_2");
-        result.addValue(100.5, "Product 1 (Asia)", "unit_3");
-        result.addValue(100.2, "Product 1 (Middle East)", "Jan 04");
+        result.addValue(25, "xxx", "卑南鄉");
+        result.addValue(20.4, "aaa", "卑南鄉");
+        result.addValue(20.5, "yyyy", "卑南鄉");
+        result.addValue(100.2, "", "卑南鄉");
 
-        result.addValue(23.3, "Product 2 (US)", "unit_4");
-        result.addValue(12.7, "Product 2 (Europe)", "unit_5");
-        result.addValue(15.4, "Product 2 (Asia)", "unit_6");
-        result.addValue(23.8, "Product 2 (Middle East)", "unit_6");
+        result.addValue(23.3, "xxx", "台東市");
+        result.addValue(12.7, "aaa", "台東市");
+        result.addValue(15.4, "yyyy", "台東市");
+        result.addValue(23.8, "", "台東市");
 
-        result.addValue(11.9, "Product 3 (US)", "Jan 04");
-        result.addValue(15.3, "Product 3 (Europe)", "Jan 04");
-        result.addValue(23.9, "Product 3 (Asia)", "Jan 04");
-        result.addValue(13.2, "Product 3 (Middle East)", "Jan 04");
+        result.addValue(11.9, "xxx", "大武鄉");
+        result.addValue(15.3, "aaa", "大武鄉");
+        result.addValue(23.9, "yyyy", "大武鄉");
+        result.addValue(13.2, "", "大武鄉");
 
         return result;
     }
@@ -73,9 +73,9 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private JFreeChart createChart(final CategoryDataset dataset) {
 
         final JFreeChart chart = ChartFactory.createStackedBarChart(
-                "Stacked Bar Chart Demo 4",  // chart title
-                "Category",                  // domain axis label
-                "Value",                     // range axis label
+                "血壓量測人數",          // chart title 大標題
+                "",           // domain axis label
+                "",             // range axis label 縱軸數值欄位名稱
                 dataset,                     // data
                 PlotOrientation.VERTICAL,    // the plot orientation
                 true,                        // legend
@@ -84,7 +84,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         );
 
         GroupedStackedBarRenderer renderer = new GroupedStackedBarRenderer();
-        KeyToGroupMap map = new KeyToGroupMap("G1");
+//        KeyToGroupMap map = new KeyToGroupMap("G1");
 //        map.mapKeyToGroup("Product 1 (US)", "G1");
 //        map.mapKeyToGroup("Product 1 (Europe)", "G1");
 //        map.mapKeyToGroup("Product 1 (Asia)", "G1");
@@ -97,7 +97,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        map.mapKeyToGroup("Product 3 (Europe)", "G3");
 //        map.mapKeyToGroup("Product 3 (Asia)", "G3");
 //        map.mapKeyToGroup("Product 3 (Middle East)", "G3");
-        renderer.setSeriesToGroupMap(map);
+//        renderer.setSeriesToGroupMap(map);
 
         renderer.setItemMargin(0.3);
         Paint p1 = new GradientPaint(
@@ -105,43 +105,61 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
                 new Color(0x22, 0x22, 0xFF)
         );
         renderer.setSeriesPaint(0, p1);
+        renderer.setSeriesPaint(6, p1);
+        renderer.setSeriesPaint(12, p1);
 
         Paint p2 = new GradientPaint(
                 0.0f, 0.0f, new Color(255, 93, 16), 0.0f, 0.0f,
                 new Color(255, 93, 16)
         );
         renderer.setSeriesPaint(1, p2);
+        renderer.setSeriesPaint(7, p2);
+        renderer.setSeriesPaint(13, p2);
 
         Paint p3 = new GradientPaint(
+                0.0f, 0.0f, new Color(108, 108, 108), 0.0f, 0.0f,
+                new Color(108, 108, 108)
+        );
+        renderer.setSeriesPaint(2, p3);
+        renderer.setSeriesPaint(8, p3);
+        renderer.setSeriesPaint(14, p3);
+
+        Paint p4 = new GradientPaint(
                 0.0f, 0.0f, new Color(0xFF, 212, 19), 0.0f, 0.0f,
                 new Color(0xFF, 212, 19)
         );
-        renderer.setSeriesPaint(2, p3);
+        renderer.setSeriesPaint(3, p4);
+        renderer.setSeriesPaint(9, p4);
+        renderer.setSeriesPaint(15, p4);
 
-        Paint p4 = new GradientPaint(
+        Paint p5 = new GradientPaint(
                 0.0f, 0.0f, new Color(67, 0xFF, 250), 0.0f, 0.0f,
                 new Color(67, 0xFF, 250)
         );
-        renderer.setSeriesPaint(3, p4);
+        renderer.setSeriesPaint(4, p5);
+        renderer.setSeriesPaint(10, p5);
+        renderer.setSeriesPaint(16, p5);
 
-        Paint p5 = new GradientPaint(
+        Paint p6 = new GradientPaint(
                 0.0f, 0.0f, new Color(88, 0xFF, 62), 0.0f, 0.0f,
                 new Color(88, 0xFF, 62)
         );
-        renderer.setSeriesPaint(4, p5);
+        renderer.setSeriesPaint(5, p6);
+        renderer.setSeriesPaint(11, p6);
+        renderer.setSeriesPaint(17, p6);
 
         renderer.setGradientPaintTransformer(
                 new StandardGradientPaintTransformer(GradientPaintTransformType.HORIZONTAL)
         );
 
-        SubCategoryAxis domainAxis = new SubCategoryAxis("Product / Month");
-        domainAxis.setCategoryMargin(0.05);
-        domainAxis.addSubCategory("Product 1");
-        domainAxis.addSubCategory("Product 2");
-        domainAxis.addSubCategory("Product 3");
+//        SubCategoryAxis domainAxis = new SubCategoryAxis("Product / Month");
+//        domainAxis.setCategoryMargin(0.05);
+//        domainAxis.addSubCategory("Product 1");
+//        domainAxis.addSubCategory("Product 2");
+//        domainAxis.addSubCategory("Product 3");
 
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
-        plot.setDomainAxis(domainAxis);
+//        plot.setDomainAxis(domainAxis);
         //plot.setDomainAxisLocation(AxisLocation.TOP_OR_RIGHT);
         plot.setRenderer(renderer);
         plot.setFixedLegendItems(createLegendItems());
@@ -157,16 +175,18 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
      */
     private LegendItemCollection createLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
-        LegendItem item1 = new LegendItem("US", new Color(0x22, 0x22, 0xFF));
-        LegendItem item2 = new LegendItem("Europe", new Color(255, 104, 43));
-        LegendItem item3 = new LegendItem("Asia", new Color(0xFF, 212, 19));
-        LegendItem item4 = new LegendItem("Middle East", new Color(67, 0xFF, 250));
-        LegendItem item5 = new LegendItem("Middle East", new Color(88, 0xFF, 62));
+        LegendItem item1 = new LegendItem("30", new Color(0x22, 0x22, 0xFF));
+        LegendItem item2 = new LegendItem("30-39", new Color(255, 104, 43));
+        LegendItem item3 = new LegendItem("40-49", new Color(108, 108, 108));
+        LegendItem item4 = new LegendItem("50-59", new Color(0xFF, 212, 19));
+        LegendItem item5 = new LegendItem("60-69", new Color(67, 0xFF, 250));
+        LegendItem item6 = new LegendItem("75", new Color(88, 0xFF, 62));
         result.add(item1);
         result.add(item2);
         result.add(item3);
         result.add(item4);
         result.add(item5);
+        result.add(item6);
         return result;
     }
 

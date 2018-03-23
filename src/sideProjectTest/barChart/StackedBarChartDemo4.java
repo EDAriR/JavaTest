@@ -54,11 +54,11 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         result.addValue(12.7, "aaa", "台東市");
         result.addValue(15.4, "yyyy", "台東市");
         result.addValue(23.8, "", "台東市");
-
-        result.addValue(11.9, "xxx", "大武鄉");
-        result.addValue(15.3, "aaa", "大武鄉");
-        result.addValue(23.9, "yyyy", "大武鄉");
-        result.addValue(13.2, "", "大武鄉");
+//
+//        result.addValue(11.9, "xxx", "大武鄉");
+//        result.addValue(15.3, "aaa", "大武鄉");
+//        result.addValue(23.9, "yyyy", "大武鄉");
+//        result.addValue(13.2, "", "大武鄉");
 
         return result;
     }
@@ -217,7 +217,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        final ChartPanel chartPanel = new ChartPanel(chart);
 //        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
 //        setContentPane(chartPanel);
-        int width = 960;    /* Width of the image */
+        int width = 120 * 2 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
         File BarChart = new File( "BarChart.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );

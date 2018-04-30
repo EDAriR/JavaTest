@@ -1,6 +1,13 @@
 package sideProjectTest.barChart;
 
 
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFPicture;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -11,7 +18,9 @@ import org.jfree.ui.GradientPaintTransformType;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
 import java.awt.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class StackedBarChartDemo42 {
@@ -20,26 +29,11 @@ public class StackedBarChartDemo42 {
 
     }
 
-    private CategoryDataset createDataset() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-        result.addValue(25, "xxx", "卑南鄉");
-        result.addValue(20.4, "aaa", "卑南鄉");
-        result.addValue(20.5, "yyyy", "卑南鄉");
-        result.addValue(100.2, "", "卑南鄉");
-
-        result.addValue(23.3, "xxx", "台東市");
-        result.addValue(12.7, "aaa", "台東市");
-        result.addValue(15.4, "yyyy", "台東市");
-        result.addValue(23.8, "", "台東市");
-
-        return result;
-    }
-
-    private JFreeChart createChart(final CategoryDataset dataset) {
+    private JFreeChart createChart(String title, CategoryDataset dataset) {
 
         final JFreeChart chart = ChartFactory.createStackedBarChart(
-                "血壓量測人數",          // chart title 大標題
+                title,          // chart title 大標題
                 "",           // domain axis label
                 "",             // range axis label 縱軸數值欄位名稱
                 dataset,                     // data
@@ -134,12 +128,84 @@ public class StackedBarChartDemo42 {
                 new sideProjectTest.barChart.StackedBarChartDemo42();
 
         final CategoryDataset dataset = demo.createDataset();
-        final JFreeChart chart = demo.createChart(dataset);
+        final CategoryDataset dataset2 = demo.createDataset2();
+        final JFreeChart chart = demo.createChart("血壓量測人數", dataset);
+        final JFreeChart chart2 = demo.createChart("註冊人數", dataset2);
         int width = 120 * 2 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
-        File BarChart = new File( "BarChart2.jpeg" );
-        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
+//        File BarChart =  new File( "BarChart2.jpeg" );
+        ByteArrayOutputStream stackedbarChartOP = new ByteArrayOutputStream();
+        ByteArrayOutputStream barChartOP = new ByteArrayOutputStream();
+
+        ChartUtilities.writeChartAsPNG(stackedbarChartOP, chart, width, height);
+        ChartUtilities.writeChartAsPNG(barChartOP, chart2, width, height);
+
+        Workbook wb = new XSSFWorkbook();
+
+        Sheet sheet = wb.createSheet("Sheet1");
+        Sheet stackedbarChartSheet = wb.createSheet("stackedbarchart");
+        Sheet barSheetSheet = wb.createSheet("barchart");
+
+        ClientAnchor stackedbarChartAnchor = new XSSFClientAnchor();
+
+        stackedbarChartAnchor.setCol1(0);
+        stackedbarChartAnchor.setRow1(0);
+
+        stackedbarChartOP.close();
+        barChartOP.close();
+
+        int stackedbarChartId = wb.addPicture(stackedbarChartOP.toByteArray(), Workbook.PICTURE_TYPE_PNG);
+        XSSFDrawing drawing = (XSSFDrawing) stackedbarChartSheet.createDrawingPatriarch();
+        XSSFPicture xsfp = drawing.createPicture(stackedbarChartAnchor, stackedbarChartId);
+        xsfp.resize();
+
+        int barChartId = wb.addPicture(barChartOP.toByteArray(), Workbook.PICTURE_TYPE_PNG);
+        XSSFDrawing bardrawing = (XSSFDrawing) barSheetSheet.createDrawingPatriarch();
+        XSSFPicture barxsfp = bardrawing.createPicture(stackedbarChartAnchor, barChartId);
+        barxsfp.resize();
+
+        FileOutputStream fileOut = new FileOutputStream("ChartExcel.xlsx");
+
+        wb.write(fileOut);
+        wb.close();
     }
+
+
+
+
+    private CategoryDataset createDataset() {
+        DefaultCategoryDataset result = new DefaultCategoryDataset();
+
+        result.addValue(25, "xxx", "卑南鄉");
+        result.addValue(20.4, "aaa", "卑南鄉");
+        result.addValue(20.5, "yyyy", "卑南鄉");
+        result.addValue(100.2, "", "卑南鄉");
+
+        result.addValue(23.3, "xxx", "台東市");
+        result.addValue(12.7, "aaa", "台東市");
+        result.addValue(15.4, "yyyy", "台東市");
+        result.addValue(23.8, "", "台東市");
+
+        return result;
+    }
+
+    private CategoryDataset createDataset2() {
+        DefaultCategoryDataset result = new DefaultCategoryDataset();
+
+        result.addValue(25, "用戶註冊人數", "卑南鄉");
+//        result.addValue(20, "用戶註冊人數", "卑南鄉");
+//        result.addValue(20, "用戶註冊人數", "卑南鄉");
+//        result.addValue(5, "用戶註冊人數", "卑南鄉");
+
+        result.addValue(2, "用戶註冊人數", "台東市");
+//        result.addValue(12, "用戶註冊人數", "台東市");
+//        result.addValue(15, "用戶註冊人數", "台東市");
+//        result.addValue(23, "用戶註冊人數", "台東市");
+
+        return result;
+    }
+
+
 
 }
 

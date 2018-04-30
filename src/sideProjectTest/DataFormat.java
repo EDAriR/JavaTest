@@ -34,7 +34,7 @@ public class DataFormat {
         System.out.println("HOUR_OF_DAY +8 " + c.get(Calendar.HOUR_OF_DAY));
         System.out.println("getTime +8 " + c.getTime());
 
-        c.add(Calendar.HOUR, 8);
+        c.add(Calendar.HOUR, 30);
         System.out.println(c.getTime());
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");

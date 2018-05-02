@@ -200,7 +200,8 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         try
         {
 
-            File file = new File("NotoSansCJK-Medium.ttc");
+//            File file = new File("NotoSansCJK-Medium.ttc");
+            File file = new File("wqy-microhei.ttc");
             FileInputStream fb = new FileInputStream(file);
             System.out.println("get input stream success");
 //            Font nf = Font.createFont(Font.TRUETYPE_FONT, new File("wqy-microhei.ttf"));
@@ -267,7 +268,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        setContentPane(chartPanel);
         int width = 120 * 2 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
-        File BarChart = new File( "BarChartSetFont.jpeg" );
+        File BarChart = new File( "BarChartwqy-microhei.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 

@@ -1,7 +1,10 @@
 package sideProjectTest.barChart;
 
 import org.jfree.chart.*;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.SubCategoryAxis;
+import org.jfree.chart.axis.TickUnitSource;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
@@ -14,8 +17,7 @@ import org.jfree.ui.RefineryUtilities;
 import org.jfree.ui.StandardGradientPaintTransformer;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class StackedBarChartDemo4 extends ApplicationFrame {
 
@@ -45,15 +47,15 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private CategoryDataset createDataset() {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-        result.addValue(25, "xxx", "卑南鄉");
-        result.addValue(20.4, "aaa", "卑南鄉");
-        result.addValue(20.5, "yyyy", "卑南鄉");
-        result.addValue(100.2, "", "卑南鄉");
-
-        result.addValue(23.3, "xxx", "台東市");
-        result.addValue(12.7, "aaa", "台東市");
-        result.addValue(15.4, "yyyy", "台東市");
-        result.addValue(23.8, "", "台東市");
+//        result.addValue(25, "xxx", "卑南鄉");
+//        result.addValue(20.4, "aaa", "卑南鄉");
+//        result.addValue(20.5, "yyyy", "卑南鄉");
+//        result.addValue(100.2, "", "卑南鄉");
+//
+//        result.addValue(23.3, "xxx", "台東市");
+//        result.addValue(12.7, "aaa", "台東市");
+//        result.addValue(15.4, "yyyy", "台東市");
+//        result.addValue(23.8, "", "台東市");
 //
 //        result.addValue(11.9, "xxx", "大武鄉");
 //        result.addValue(15.3, "aaa", "大武鄉");
@@ -163,8 +165,54 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         //plot.setDomainAxisLocation(AxisLocation.TOP_OR_RIGHT);
         plot.setRenderer(renderer);
         plot.setFixedLegendItems(createLegendItems());
+
+        ValueAxis rangeAxis = plot.getRangeAxis();
+
+        //設置Y轴的最小值
+        rangeAxis.setLowerBound(0);
+
+        // 設置 Y軸刻度 為整數
+//        NumberAxis axis = (NumberAxis) plot.getRangeAxis();
+        TickUnitSource units = NumberAxis.createIntegerTickUnits();
+        rangeAxis.setStandardTickUnits(units);
+
+        // 標題
+        chart.getTitle().setFont(font14);
+
+        rangeAxis.setLabelFont(font10);
+        //设置x轴坐标字体
+        rangeAxis.setTickLabelFont(font10);
+        //y轴
+        //设置y轴标题字体
+        rangeAxis.setLabelFont(font10);
+        //设置y轴坐标字体
+        rangeAxis.setTickLabelFont(font10);
+
         return chart;
 
+    }
+
+    private static Font font10;//普通字体 10号
+    private static Font font14;//标题字体 14号
+
+    static//静态加载字体,实现linux中不安装字体 使jre显示中文
+    {
+        try
+        {
+
+            File file = new File("NotoSansCJK-Medium.ttc");
+            FileInputStream fb = new FileInputStream(file);
+            System.out.println("get input stream success");
+//            Font nf = Font.createFont(Font.TRUETYPE_FONT, new File("wqy-microhei.ttf"));
+
+            Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
+            System.out.println("createFont");
+            font10 = nf.deriveFont(Font.BOLD, 10);
+            font14 = nf.deriveFont(Font.BOLD, 14);
+        } catch (Exception e) {
+            //TODO 抛出"配置错误"异常
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -219,7 +267,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        setContentPane(chartPanel);
         int width = 120 * 2 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
-        File BarChart = new File( "BarChart.jpeg" );
+        File BarChart = new File( "BarChartSetFont.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 

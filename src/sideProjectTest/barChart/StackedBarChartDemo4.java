@@ -201,7 +201,8 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         {
 
 //            File file = new File("NotoSansCJK-Medium.ttc");
-            File file = new File("wqy-microhei.ttc");
+//            File file = new File("wqy-microhei.ttc");
+            File file = new File("NotoSansCJKtc-Medium.otf");
             FileInputStream fb = new FileInputStream(file);
             System.out.println("get input stream success");
 //            Font nf = Font.createFont(Font.TRUETYPE_FONT, new File("wqy-microhei.ttf"));
@@ -209,7 +210,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
             Font nf = Font.createFont(Font.TRUETYPE_FONT, fb);
             System.out.println("createFont");
             font10 = nf.deriveFont(Font.BOLD, 10);
-            font14 = nf.deriveFont(Font.BOLD, 14);
+            font14 = nf.deriveFont(Font.BOLD, 16);
         } catch (Exception e) {
             //TODO 抛出"配置错误"异常
             e.printStackTrace();
@@ -268,7 +269,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        setContentPane(chartPanel);
         int width = 120 * 2 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
-        File BarChart = new File( "BarChartwqy-microhei.jpeg" );
+        File BarChart = new File( "BarChart_NotoSansCJKtc-Medium.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 

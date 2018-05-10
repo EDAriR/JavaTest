@@ -49,9 +49,11 @@ public class ParseToSolr {
         StringBuffer reDecode2 = new StringBuffer(decode).reverse();
 
 
-        int index = 0;
+
         Map<String, String> map = findCommonFieldNameMap();
         Set<String> set = map.keySet();
+
+        int index = 0;
         boolean flag = true;
         boolean strFlag = false;
 
@@ -127,9 +129,31 @@ public class ParseToSolr {
                 nowStr =this.nowStr;
             }
 
-            boolean
-
-
+//            boolean
+//
+//            if (nowStr.equals("\"") && strFlag == false){
+//                strFlag = true;
+//                continue;
+//            }
+//
+//            if (nowStr.equals("\"") && strFlag == true){
+//                strFlag = false;
+//                continue;
+//            }
+//
+//            if (strFlag)
+//                    continue;
+//
+//            if (nowStr.equals("(")){
+//                index = i + 1;
+//                continue;
+//            }
+//
+//            if(nowStr.equals(" ")) {
+//                index = i +1 ;
+//                flag = true;
+//                continue;
+//            }
 
         }
 

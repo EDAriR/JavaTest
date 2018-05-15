@@ -57,36 +57,37 @@ public class ParseToSolr {
         boolean flag = true;
         boolean strFlag = false;
 
-        List<String> re = new ArrayList<>();
+        List<String> waiteReplceKey = new ArrayList<>();
 
         for (int i = 0; i < filterStr.length(); i++) {
 
             String nowStr = filterStr.substring(i, i + 1);
 
+            logic lo = new logic(index, flag, strFlag, i, nowStr);
+
             // 遇到
-            if (nowStr.equals("\"") && strFlag == false){
-                strFlag = true;
+            if (lo.isQuotationMark()){
                 continue;
             }
 
-            if (nowStr.equals("\"") && strFlag == true){
-                strFlag = false;
+            if (lo.isQuotationMark()){
                 continue;
             }
 
             if (strFlag)
                 continue;
 
-            if (nowStr.equals("(")){
-                index = i + 1;
+            if (lo.isBracket()){
                 continue;
             }
 
-            if(nowStr.equals(" ")) {
-                index = i +1 ;
-                flag = true;
+            if(lo.isWhiteSpace()) {
                 continue;
             }
+
+            flag = lo.flag;
+            index = lo.index;
+            i = lo.i;
 
             if(nowStr.equals(":") && flag == true) {
                 flag = false;
@@ -95,7 +96,7 @@ public class ParseToSolr {
 
                 System.out.println("unCheckKey = " + unCheckKey + " and in Keyset :" + set.contains(unCheckKey));
                 if (set.contains(unCheckKey))
-                    re.add(unCheckKey);
+                    waiteReplceKey.add(unCheckKey);
                 else {
                     System.out.println("✩★☆★☆★☆★☆✩  " + unCheckKey + " not in keySet do something" + "✩★☆★☆★☆★☆✩  ");
                 }
@@ -105,57 +106,64 @@ public class ParseToSolr {
 
         System.out.println("======================");
         String reOk = "";
-        for (String r:re) {
+        for (String r:waiteReplceKey) {
             System.out.println("r : " + r + " || get(r) : " +map.get(r));
             reOk = filterStr.replace(r, map.get(r));
             filterStr = reOk;
         }
         System.out.println(reOk);
 
-        class logic{
+    }
 
-            int index;
-            boolean flag;
-            boolean strFlag;
-            int i;
-            String nowStr;
+    private static class logic {
 
-            logic(int index, boolean flag, boolean strFlag, int i, String nowStr){
+        private int index;
+        private boolean flag;
+        private boolean strFlag;
+        private int i;
+        private String nowStr;
 
-                index = this.index;
-                flag = this.flag;
-                strFlag = this.strFlag;
-                i = this.i;
-                nowStr =this.nowStr;
-            }
+        public logic(int index, boolean flag, boolean strFlag, int i, String nowStr) {
 
-//            boolean
-//
-//            if (nowStr.equals("\"") && strFlag == false){
-//                strFlag = true;
-//                continue;
-//            }
-//
-//            if (nowStr.equals("\"") && strFlag == true){
-//                strFlag = false;
-//                continue;
-//            }
-//
-//            if (strFlag)
-//                    continue;
-//
-//            if (nowStr.equals("(")){
-//                index = i + 1;
-//                continue;
-//            }
-//
-//            if(nowStr.equals(" ")) {
-//                index = i +1 ;
-//                flag = true;
-//                continue;
-//            }
-
+            this.index = index;
+            this.flag = flag;
+            this.strFlag = strFlag;
+            this.i = i;
+            this.nowStr = nowStr;
         }
 
+        boolean isQuotationMark(){
+            if (nowStr.equals("\"") && strFlag == false) {
+                strFlag = true;
+                return true;
+            }
+
+            if (nowStr.equals("\"") && strFlag == true){
+                strFlag = false;
+                return true;
+            }
+
+            return false;
+        }
+
+        boolean isBracket(){
+
+            if (nowStr.equals("(")){
+                index = i + 1;
+                return true;
+            }
+
+            return false;
+        }
+
+        boolean isWhiteSpace(){
+
+            if(nowStr.equals(" ")) {
+                index = i +1 ;
+                flag = true;
+                return true;
+            }
+            return false;
+        }
     }
 }

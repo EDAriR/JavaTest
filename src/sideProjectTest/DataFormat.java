@@ -1,6 +1,7 @@
 package sideProjectTest;
 
 import javax.xml.bind.DatatypeConverter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,9 +38,9 @@ public class DataFormat {
         c.add(Calendar.HOUR, 30);
         System.out.println(c.getTime());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        System.out.println(sdf.format(c.getTime()).toString());
-        System.out.println(sdf.format(new Date()));
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH'\\':mm'\\':ss.SSSX");
+        System.out.println(df.format(c.getTime()).toString());
+        System.out.println(df.format(new Date()));
 
     }
 }

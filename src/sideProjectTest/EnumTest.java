@@ -8,7 +8,7 @@ public class EnumTest {
         String ee = "YES";
 
         System.out.println("============");
-        System.out.println(TEST.valueOf(ee).createTest(ee));
+//        System.out.println(TEST.valueOf(ee).createTest(ee));
 
         System.out.println("============");
 //        System.out.println(TEST.YES.YES);

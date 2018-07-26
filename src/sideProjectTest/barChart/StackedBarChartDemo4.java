@@ -33,7 +33,7 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
 //        final ChartPanel chartPanel = new ChartPanel(chart);
 //        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
 //        setContentPane(chartPanel);
-        int width = 960;    /* Width of the image */
+        int width = 160 * 7 ;    /* Width of the image */
         int height = 540;   /* Height of the image */
         File BarChart = new File( "BarChart.jpeg" );
         ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
@@ -47,20 +47,40 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
     private CategoryDataset createDataset() {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-//        result.addValue(25, "xxx", "卑南鄉");
-//        result.addValue(20.4, "aaa", "卑南鄉");
-//        result.addValue(20.5, "yyyy", "卑南鄉");
-//        result.addValue(100.2, "", "卑南鄉");
-//
-//        result.addValue(23.3, "xxx", "台東市");
-//        result.addValue(12.7, "aaa", "台東市");
-//        result.addValue(15.4, "yyyy", "台東市");
-//        result.addValue(23.8, "", "台東市");
-//
-//        result.addValue(11.9, "xxx", "大武鄉");
-//        result.addValue(15.3, "aaa", "大武鄉");
-//        result.addValue(23.9, "yyyy", "大武鄉");
-//        result.addValue(13.2, "", "大武鄉");
+        result.addValue(11, "xxx", "卑南鄉");
+        result.addValue(20.4, "aaa", "卑南鄉");
+        result.addValue(40.5, "yyyy", "卑南鄉");
+        result.addValue(100.2, "", "卑南鄉");
+
+        result.addValue(23.3, "xxx", "台東市");
+        result.addValue(12.7, "aaa", "台東市");
+        result.addValue(23.8, "", "台東市");
+        result.addValue(null, "yyyy", "台東市");
+
+        result.addValue(11.9, "xxx", "大武鄉");
+        result.addValue(null, "aaa", "大武鄉");
+        result.addValue(null, "yyyy", "大武鄉");
+        result.addValue(13.2, "", "大武鄉");
+
+        result.addValue(11.9, "xxx", "xx鄉");
+        result.addValue(15.3, "aaa", "xx鄉");
+        result.addValue(23.9, "yyyy", "xx鄉");
+        result.addValue(13.2, "", "xx鄉");
+
+        result.addValue(11.9, "xxx", "aa鄉");
+        result.addValue(15.3, "aaa", "aa鄉");
+        result.addValue(23.9, "yyyy", "aa鄉");
+        result.addValue(13.2, "", "aa鄉");
+
+        result.addValue(null, "xxx", "qq鄉");
+        result.addValue(null, "aaa", "qq鄉");
+        result.addValue(null, "yyyy", "qq鄉");
+        result.addValue(null, "", "qq鄉");
+
+        result.addValue(null, "xxx", "ww鄉");
+        result.addValue(null, "aaa", "ww鄉");
+        result.addValue(null, "yyyy", "ww鄉");
+        result.addValue(null, "", "ww鄉");
 
         return result;
     }
@@ -240,37 +260,17 @@ public class StackedBarChartDemo4 extends ApplicationFrame {
         return result;
     }
 
-    // ****************************************************************************
-    // * JFREECHART DEVELOPER GUIDE                                               *
-    // * The JFreeChart Developer Guide, written by David Gilbert, is available   *
-    // * to purchase from Object Refinery Limited:                                *
-    // *                                                                          *
-    // * http://www.object-refinery.com/jfreechart/guide.html                     *
-    // *                                                                          *
-    // * Sales are used to provide funding for the JFreeChart project - please    *
-    // * support us so that we can continue developing free software.             *
-    // ****************************************************************************
 
-    /**
-     * Starting point for the demonstration application.
-     *
-     * @param args  ignored.
-     */
     public static void main(final String[] args) throws IOException {
         final StackedBarChartDemo4 demo = new StackedBarChartDemo4("Stacked Bar Chart Demo 4");
-//        demo.pack();
-//        RefineryUtilities.centerFrameOnScreen(demo);
-//        demo.setVisible(true);
 
-        final CategoryDataset dataset = demo.createDataset();
-        final JFreeChart chart = demo.createChart(dataset);
-//        final ChartPanel chartPanel = new ChartPanel(chart);
-//        chartPanel.setPreferredSize(new java.awt.Dimension(590, 350));
-//        setContentPane(chartPanel);
-        int width = 120 * 2 ;    /* Width of the image */
-        int height = 540;   /* Height of the image */
-        File BarChart = new File( "BarChart_NotoSansCJKtc-Medium.jpeg" );
-        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
+//        final CategoryDataset dataset = demo.createDataset();
+//        final JFreeChart chart = demo.createChart(dataset);
+//
+//        int width = 120 * 1 ;    /* Width of the image */
+//        int height = 540;   /* Height of the image */
+//        File BarChart = new File( "stackebarchart.jpeg" );
+//        ChartUtilities.saveChartAsJPEG( BarChart , chart , width , height );
     }
 
 }

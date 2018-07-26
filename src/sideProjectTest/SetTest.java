@@ -14,6 +14,10 @@ public class SetTest {
         System.out.println(bs.add("ab"));
         System.out.println(bs.add("ac"));
 
+        Set<String> bs2 = new HashSet<>(bs);
+
+        System.out.println(bs2);
+
     }
 
 }

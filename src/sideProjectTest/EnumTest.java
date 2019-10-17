@@ -1,5 +1,10 @@
 package sideProjectTest;
 
+import javax.persistence.metamodel.EntityType;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class EnumTest {
 
     public static void main(String[] args) {
@@ -25,10 +30,30 @@ public class EnumTest {
 //        for (TEST t:TEST.values()) {
 //            System.out.println(t.name());
 //        }
+
+        System.out.println(lookup.get("1"));
 //
 //        System.out.println(TEST.valueOf("NO"));
 //        System.out.println(TEST.valueOf("N"));
 
 
+    }
+
+    private static final Map<String , FLAG> lookup =
+            Arrays.stream(FLAG.values())
+                    .collect(Collectors.toMap(FLAG::getValue, e -> e));
+
+    public enum FLAG{
+        YES("Y"),NO("N");
+
+        private String value;
+
+        FLAG(String value){
+            this.value = value;
+        }
+
+        public String getValue(){
+            return this.value;
+        }
     }
 }
